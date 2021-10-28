@@ -10,7 +10,7 @@ function Stack() {
     const push=()=>{
     
     if(elements.length<9){
-       let  newElement=prompt("enter value")
+       let  newElement=prompt("Enter value")
      
        setElements([...elements,newElement])
        setColors([...colors,false])

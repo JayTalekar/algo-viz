@@ -9,6 +9,7 @@ import DataStructure from "./components/DataStructure"
 import Nqueen from "./components/Nqueen"
 import Stack from "./components/Stack"
 import Queue from "./components/Queue"
+import LinearSearch from './Algorithm/Searching/LinearSearch'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
            <Nqueen path="/nqueen" />
            <Stack path="/stack" />
            <Queue path="/queue" />
+           <LinearSearch path="/linearsearch" />
          </Router>
     </div>
   )
