@@ -1,0 +1,13 @@
+.cell{
+    width:70px;
+    height:75px;
+    outline: 1px solid rgb(0, 66, 66);
+
+    display: inline-block;
+}
+.cell > h1{
+    display: block;
+    text-align: center;
+     margin-top:15px;
+
+}

@@ -1,0 +1,22 @@
+.searching-sorting{
+    width:100% ;
+    height:100vh;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+ }
+ .link{
+     all:unset;
+     color:#fff;
+ }
+ .link:hover{
+     color:#fff;
+ }
+ .sort_card{
+     margin:0 30px!important;
+ }
+ @media screen and (max-width: 480px) {
+     .home{
+         flex-direction: column;
+     }
+   }
