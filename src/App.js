@@ -8,6 +8,8 @@ import SearchingSorting from "./components/SearchingSorting"
 import DataStructure from "./components/DataStructure"
 import Nqueen from "./components/Nqueen"
 import Stack from "./components/Stack"
+import Queue from "./components/Queue"
+
 function App() {
   return (
     <div>
@@ -20,6 +22,7 @@ function App() {
            <Pathfinding path="/pathfinding" />
            <Nqueen path="/nqueen" />
            <Stack path="/stack" />
+           <Queue path="/queue" />
          </Router>
     </div>
   )
