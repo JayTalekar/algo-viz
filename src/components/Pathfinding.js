@@ -6,6 +6,7 @@ import {getNodesInShortestPathOrder,dijkstra} from "../Algorithm/PathFinding/Dji
 
 function Pathfinding() {
     const [state,setState]=useState({grid:[],mouseIsPressed:false})
+    const [start,setStart]=useState(0)
     const {grid, mouseIsPressed} = state;
     const START_NODE_ROW = 10;
     const START_NODE_COL = 15;
@@ -13,7 +14,7 @@ function Pathfinding() {
     const FINISH_NODE_COL = 35;
 
     const getIntialGrid=()=>{
-      const grid=[];
+      const initialGrid=[];
       for(let row=0;row<20;row++)
       {
           const currentRow=[];
@@ -21,10 +22,10 @@ function Pathfinding() {
           {
               currentRow.push(createNode(col,row))
           }
-          grid.push(currentRow);
+          initialGrid.push(currentRow);
       }
     
-      return grid;
+      return initialGrid;
   }
 
     console.log(grid);
@@ -33,21 +34,27 @@ function Pathfinding() {
         setState({grid:grid,mouseIsPressed:false});
     },[])
     const handleMouseDown=(row, col) =>{
+      if(!start){
       console.log("mouse down")
       const newGrid = getNewGridWithWallToggled(state.grid, row, col);
       setState({grid: newGrid, mouseIsPressed: true});
+      }
     }
   
     const handleMouseEnter=(row, col)=> {
+      if(!start){
       if (!state.mouseIsPressed) return;
       console.log("mouse enter")
       const newGrid = getNewGridWithWallToggled(state.grid, row, col);
       setState({grid: newGrid,mouseIsPressed:true});
+      }
     }
   
     const handleMouseUp=() =>{
+      if(!start){
       console.log("mouse up");
       setState({grid:grid,mouseIsPressed: false});
+      }
     }
     
  
@@ -61,6 +68,7 @@ function Pathfinding() {
             isVisited: false,
             isWall: false,
             previousNode: null,
+            isNode:true
         }
     }
     const getNewGridWithWallToggled = (grid, row, col) => {
@@ -73,44 +81,165 @@ function Pathfinding() {
       newGrid[row][col] = newNode;
       return newGrid;
     };
-
-    const animateShortestPath=(nodesInShortestPathOrder)=> {
-      for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
-        setTimeout(() => {
-          const node = nodesInShortestPathOrder[i];
-          document.getElementById(`node-${node.row}-${node.col}`).className =
-            'node node-shortest-path';
-        }, 50 * i);
+  
+  const clearWalls=()=> {
+      if (!start) {
+        const newGrid = state.grid.slice();
+        for (const row of newGrid) {
+          for (const node of row) {
+            let nodeClassName = document.getElementById(
+              `node-${node.row}-${node.col}`,
+            ).className;
+            if (nodeClassName === 'node node-wall') {
+              document.getElementById(`node-${node.row}-${node.col}`).className =
+                'node';
+              node.isWall = false;
+            }
+          }
+        }
       }
     }
-    const animateDijkstra=(visitedNodesInOrder, nodesInShortestPathOrder)=> {
+    //to clear grid 
+const clearGrid = ()=>{
+ 
+    //  clearWalls();
+  if(!start){
+      const newGrid = state.grid.slice();
+      for (const row of newGrid) {
+        for (const node of row) {
+          let nodeClassName = document.getElementById(
+            `node-${node.row}-${node.col}`,
+          ).className;
+         if(nodeClassName==='node node-wall')
+         {
+           node.isWall=false;
+           node.isNode=true;
+           node.isVisited=false;
+           node.previousNode=null;
+           document.getElementById(`node-${node.row}-${node.col}`).className =
+           'node';
+         }
+         else if(nodeClassName==='node node-start')
+         {
+           node.isStart=true;
+           node.isNode=true;
+           node.isVisited=false;
+           node.previousNode=null;
+           document.getElementById(`node-${node.row}-${node.col}`).className =
+           'node node-start';
+
+         }
+         else if(nodeClassName==='node node-finish')
+         {
+           node.isFinish=true;
+           node.isNode=true;
+           node.isVisited=false;
+           node.previousNode=null;
+           document.getElementById(`node-${node.row}-${node.col}`).className =
+           'node node-finish';
+
+         }
+         else if(nodeClassName==='node node-visited')
+         {
+          node.isVisited=false;
+          node.previousNode=null;
+          node.isNode=true;
+          document.getElementById(`node-${node.row}-${node.col}`).className =
+          'node';
+          
+         }
+         else if(nodeClassName==='node node-shortest-path')
+         {
+           node.isVisited=false;
+           node.previousNode=null;
+           node.isNode=true;
+           document.getElementById(`node-${node.row}-${node.col}`).className =
+           'node';
+
+         }
+        /* else{
+          document.getElementById(`node-${node.row}-${node.col}`).className =
+          'node';
+         }
+         */
+        
+      }
+    }
+     // setState({grid:newGrid,mouseIsPressed: false});
+    }
+}
+    const animateShortestPath=(nodesInShortestPathOrder)=> {
+      for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
+        if (nodesInShortestPathOrder[i].isFinish) {
+          setTimeout(() => {
+           setStart(0)
+           console.log("ye loop")
+          }, i * 50);
+        }
+        else{
+        setTimeout(() => {
+          const node = nodesInShortestPathOrder[i];
+          if(node.isStart===true) {
+            document.getElementById(`node-${node.row}-${node.col}`).className =
+            'node node-start node-visited';
+          }
+          else if(node.isFinish===true) {
+            document.getElementById(`node-${node.row}-${node.col}`).className =
+            'node node-finish node-visited';
+          }
+          else{
+          document.getElementById(`node-${node.row}-${node.col}`).className =
+            'node node-shortest-path';
+          }
+         
+        }, 40 * i);
+      }
+      }
+    }
+    const animateDijkstra=async (visitedNodesInOrder, nodesInShortestPathOrder)=> {
       for (let i = 0; i <= visitedNodesInOrder.length; i++) {
         if (i === visitedNodesInOrder.length) {
-          setTimeout(() => {
+         setTimeout(() => {
+         
             animateShortestPath(nodesInShortestPathOrder);
           }, 10 * i);
           return;
         }
         setTimeout(() => {
           const node = visitedNodesInOrder[i];
+          if(node.isStart===true) {
+            document.getElementById(`node-${node.row}-${node.col}`).className =
+            'node node-start node-visited';
+          }
+          else if(node.isFinish===true) {
+            document.getElementById(`node-${node.row}-${node.col}`).className =
+            'node node-finish node-visited';
+          }
+          else{
           document.getElementById(`node-${node.row}-${node.col}`).className =
-            'node node-visited';
+            'node node-visited';}
         }, 10 * i);
       }
+     
     }
-    const visualizeDijkstra=()=> {
+    const visualizeDijkstra=async()=> {
+     
       const {grid} = state;
+      setStart(1);
+      console.log("start ",start)
       const startNode = grid[START_NODE_ROW][START_NODE_COL];
       const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
       const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
       const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
-      animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
+       animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
+
+     
     }
   
     return (
       
         <div>
-        <button className="btn"onClick={()=>visualizeDijkstra()}>Visualize Dijkstra</button>
+       
             <div className="grid">
           {grid && grid.map((row, rowIdx) => {
             return (
@@ -136,6 +265,11 @@ function Pathfinding() {
               </div>
             );
           })}
+        </div>
+        <div style={{"display":"flex","justifyContent": "center","alignItems":"center"}}>
+        <button className="btn" onClick={()=>visualizeDijkstra()}>Visualize Dijkstra</button>
+        <button className="btn" onClick={clearWalls}>Clear Wall</button>
+        <button className="btn" onClick={clearGrid}>Clear Grid</button>
         </div>
         </div>
     )
