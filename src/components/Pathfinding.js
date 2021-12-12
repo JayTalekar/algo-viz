@@ -3,6 +3,7 @@ import Node from "./Node/Node"
 import "./Pathfinding.css"
 
 import {getNodesInShortestPathOrder,dijkstra} from "../Algorithm/PathFinding/Djikstra"
+import {dfs} from "../Algorithm/PathFinding/Dfs"
 
 function Pathfinding() {
     const [state,setState]=useState({grid:[],mouseIsPressed:false})
@@ -110,7 +111,8 @@ const clearGrid = ()=>{
           let nodeClassName = document.getElementById(
             `node-${node.row}-${node.col}`,
           ).className;
-         if(nodeClassName==='node node-wall')
+          node.isVisited=false;
+        /* if(nodeClassName==='node node-wall')
          {
            node.isWall=false;
            node.isNode=true;
@@ -118,8 +120,8 @@ const clearGrid = ()=>{
            node.previousNode=null;
            document.getElementById(`node-${node.row}-${node.col}`).className =
            'node';
-         }
-         else if(nodeClassName==='node node-start')
+         }*/
+          if(nodeClassName==='node node-start')
          {
            node.isStart=true;
            node.isNode=true;
@@ -173,35 +175,35 @@ const clearGrid = ()=>{
         if (nodesInShortestPathOrder[i].isFinish) {
           setTimeout(() => {
            setStart(0)
-           console.log("ye loop")
+           console.log("ye loop",start)
           }, i * 50);
         }
         else{
-        setTimeout(() => {
-          const node = nodesInShortestPathOrder[i];
-          if(node.isStart===true) {
+          setTimeout(() => {
+            const node = nodesInShortestPathOrder[i];
+            if(node.isStart===true) {
+              document.getElementById(`node-${node.row}-${node.col}`).className =
+              'node node-start node-visited';
+            }
+            else if(node.isFinish===true) {
+              document.getElementById(`node-${node.row}-${node.col}`).className =
+              'node node-finish node-visited';
+            }
+            else{
             document.getElementById(`node-${node.row}-${node.col}`).className =
-            'node node-start node-visited';
-          }
-          else if(node.isFinish===true) {
-            document.getElementById(`node-${node.row}-${node.col}`).className =
-            'node node-finish node-visited';
-          }
-          else{
-          document.getElementById(`node-${node.row}-${node.col}`).className =
-            'node node-shortest-path';
-          }
-         
-        }, 40 * i);
+              'node node-shortest-path';
+            }
+          }, i * 50)
       }
       }
     }
-    const animateDijkstra=async (visitedNodesInOrder, nodesInShortestPathOrder)=> {
+    const animate=async (visitedNodesInOrder, nodesInShortestPathOrder)=> {
       for (let i = 0; i <= visitedNodesInOrder.length; i++) {
         if (i === visitedNodesInOrder.length) {
          setTimeout(() => {
          
-            animateShortestPath(nodesInShortestPathOrder);
+           animateShortestPath(nodesInShortestPathOrder);
+    
           }, 10 * i);
           return;
         }
@@ -222,19 +224,31 @@ const clearGrid = ()=>{
       }
      
     }
-    const visualizeDijkstra=async()=> {
-     
-      const {grid} = state;
-      setStart(1);
-      console.log("start ",start)
-      const startNode = grid[START_NODE_ROW][START_NODE_COL];
-      const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
-      const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
-      const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
-       animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
-
-     
+   const  visualize=(algo)=> {
+      if (!start) {
+        setStart(1)
+       console.log('start is ',start)
+        const startNode =
+          grid[START_NODE_ROW][START_NODE_COL];
+        const finishNode =
+          grid[FINISH_NODE_ROW][FINISH_NODE_COL];
+        let visitedNodesInOrder;
+        switch (algo) {
+          case 'Dijkstra':
+            visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
+            break;
+          case 'DFS':
+            visitedNodesInOrder = dfs(grid, startNode, finishNode);
+            break;
+          default:
+            // should never get here
+            break;
+        }
+        const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
+        animate(visitedNodesInOrder, nodesInShortestPathOrder);
+      }
     }
+  
   
     return (
       
@@ -267,7 +281,8 @@ const clearGrid = ()=>{
           })}
         </div>
         <div style={{"display":"flex","justifyContent": "center","alignItems":"center"}}>
-        <button className="btn" onClick={()=>visualizeDijkstra()}>Visualize Dijkstra</button>
+        <button className="btn" onClick={()=>visualize("Dijkstra")}>Visualize Dijkstra</button>
+        <button className="btn" onClick={()=>visualize("DFS")}>DFS</button>
         <button className="btn" onClick={clearWalls}>Clear Wall</button>
         <button className="btn" onClick={clearGrid}>Clear Grid</button>
         </div>

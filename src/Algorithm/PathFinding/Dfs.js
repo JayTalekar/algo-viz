@@ -1,6 +1,8 @@
-export function dfs(grid, startNode, finishNode) {
+const dfs=(grid, startNode, finishNode)=> {
     const visitedNodesInOrder = [];
     const nextNodesStack = [];
+    console.log("grid is ")
+    console.log(grid)
     nextNodesStack.push(startNode);
     while (nextNodesStack.length) {
       const currentNode = nextNodesStack.pop();
@@ -49,3 +51,4 @@ export function dfs(grid, startNode, finishNode) {
       }
     }
   }
+export {dfs}
