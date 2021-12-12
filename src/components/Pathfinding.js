@@ -4,6 +4,7 @@ import "./Pathfinding.css"
 
 import {getNodesInShortestPathOrder,dijkstra} from "../Algorithm/PathFinding/Djikstra"
 import {dfs} from "../Algorithm/PathFinding/Dfs"
+import {bfs} from "../Algorithm/PathFinding/Bfs"
 
 function Pathfinding() {
     const [state,setState]=useState({grid:[],mouseIsPressed:false})
@@ -240,6 +241,9 @@ const clearGrid = ()=>{
           case 'DFS':
             visitedNodesInOrder = dfs(grid, startNode, finishNode);
             break;
+          case 'BFS':
+            visitedNodesInOrder = bfs(grid, startNode, finishNode);
+            break;
           default:
             // should never get here
             break;
@@ -280,9 +284,10 @@ const clearGrid = ()=>{
             );
           })}
         </div>
-        <div style={{"display":"flex","justifyContent": "center","alignItems":"center"}}>
+        <div style={{"display":"flex","alignItems":"center"}}>
         <button className="btn" onClick={()=>visualize("Dijkstra")}>Visualize Dijkstra</button>
         <button className="btn" onClick={()=>visualize("DFS")}>DFS</button>
+        <button className="btn" onClick={()=>visualize("BFS")}>BFS</button>
         <button className="btn" onClick={clearWalls}>Clear Wall</button>
         <button className="btn" onClick={clearGrid}>Clear Grid</button>
         </div>
