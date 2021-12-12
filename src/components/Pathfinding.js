@@ -5,8 +5,10 @@ import "./Pathfinding.css"
 import {getNodesInShortestPathOrder,dijkstra} from "../Algorithm/PathFinding/Djikstra"
 import {dfs} from "../Algorithm/PathFinding/Dfs"
 import {bfs} from "../Algorithm/PathFinding/Bfs"
+import {AStar} from "../Algorithm/PathFinding/astar"
 
 function Pathfinding() {
+
     const [state,setState]=useState({grid:[],mouseIsPressed:false})
     const [start,setStart]=useState(0)
     const {grid, mouseIsPressed} = state;
@@ -68,6 +70,9 @@ function Pathfinding() {
             isFinish: row === FINISH_NODE_ROW && col === FINISH_NODE_COL,
             distance: Infinity,
             isVisited: false,
+            distanceToFinishNode:
+            Math.abs(FINISH_NODE_ROW - row) +
+             Math.abs(FINISH_NODE_COL - col),
             isWall: false,
             previousNode: null,
             isNode:true
@@ -176,7 +181,7 @@ const clearGrid = ()=>{
         if (nodesInShortestPathOrder[i].isFinish) {
           setTimeout(() => {
            setStart(0)
-           console.log("ye loop",start)
+         
           }, i * 50);
         }
         else{
@@ -244,6 +249,9 @@ const clearGrid = ()=>{
           case 'BFS':
             visitedNodesInOrder = bfs(grid, startNode, finishNode);
             break;
+          case 'astar':
+              visitedNodesInOrder = AStar(grid, startNode, finishNode);
+              break;
           default:
             // should never get here
             break;
@@ -288,6 +296,7 @@ const clearGrid = ()=>{
         <button className="btn" onClick={()=>visualize("Dijkstra")}>Visualize Dijkstra</button>
         <button className="btn" onClick={()=>visualize("DFS")}>DFS</button>
         <button className="btn" onClick={()=>visualize("BFS")}>BFS</button>
+        <button className="btn" onClick={()=>visualize("astar")}>ASTAR</button>
         <button className="btn" onClick={clearWalls}>Clear Wall</button>
         <button className="btn" onClick={clearGrid}>Clear Grid</button>
         </div>
