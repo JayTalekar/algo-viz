@@ -34,10 +34,9 @@ function Home() {
             <Card style={{ width: "18rem" }}>
               <Card.Img variant="top" src={SortingAlgo} />
               <Card.Body>
-                <Card.Title>Sorting Algorithm</Card.Title>
+                <Card.Title style={{fontWeight: "bold"}}>Sorting Algorithm</Card.Title>
                 <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
+                A Sorting Algorithm is used to rearrange a given array or list elements according to a comparison operator on the elements
                 </Card.Text>
                 <Button variant="primary"><Link to="/sorting-algorithm" style={{all:"unset",color:"white"}}>Visualize</Link></Button>
               </Card.Body>
@@ -48,10 +47,9 @@ function Home() {
               <Card style={{ width: "18rem" }}>
                 <Card.Img variant="top" src={Pathfinding}/>
                 <Card.Body>
-                  <Card.Title>Pathfinding Algorithm</Card.Title>
+                  <Card.Title style={{fontWeight: "bold"}}>Pathfinding Algorithm</Card.Title>
                   <Card.Text>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                  Path finding algorithms  explore routes between nodes, starting at one node and traversing through relationships until the destination has been reached
                   </Card.Text>
                   <Button variant="primary"><Link to="/pathfinding" style={{all:"unset",color:"white"}}>Visualize</Link></Button>
                 </Card.Body>
@@ -63,10 +61,9 @@ function Home() {
             <Card style={{ width: "18rem" }}>
               <Card.Img variant="top" src={Stack} />
               <Card.Body>
-                <Card.Title>Stack</Card.Title>
+                <Card.Title style={{fontWeight: "bold"}}>Stack</Card.Title>
                 <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
+                Stack is a linear data structure which follows a particular order in which the operations are performed. 
                 </Card.Text>
                 <Button variant="primary"><Link to="/stack" style={{all:"unset",color:"white"}}>Visualize</Link></Button>
               </Card.Body>
@@ -76,10 +73,9 @@ function Home() {
             <Card style={{ width: "18rem" }}>
               <Card.Img variant="top" src={Queue}/>
               <Card.Body>
-                <Card.Title>Queue</Card.Title>
+                <Card.Title style={{fontWeight: "bold"}}>Queue</Card.Title>
                 <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
+                Queue is an abstract data structure, somewhat similar to Stacks. Unlike stacks, a queue is open at both its ends
                 </Card.Text>
                 <Button variant="primary"><Link to="/queue" style={{all:"unset",color:"white"}}>Visualize</Link></Button>
               </Card.Body>
@@ -94,10 +90,9 @@ function Home() {
               <Card style={{ width: "18rem" }}>
                 <Card.Img variant="top" src={Nqueen}/>
                 <Card.Body>
-                  <Card.Title>Nqueen (Backtracking) </Card.Title>
+                  <Card.Title style={{fontWeight: "bold"}}>Nqueen (Backtracking) </Card.Title>
                   <Card.Text>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                  The N Queen is the problem of placing N chess queens on an N×N chessboard so that no two queens attack each other
                   </Card.Text>
                   <Button variant="primary"><Link to="/nqueen" style={{all:"unset",color:"white"}}>Visualize</Link></Button>
                 </Card.Body>
@@ -108,10 +103,9 @@ function Home() {
             <Card style={{ width: "18rem" }}>
               <Card.Img variant="top" src={Tree} />
               <Card.Body>
-                <Card.Title>Tree</Card.Title>
+                <Card.Title style={{fontWeight: "bold"}}>Tree</Card.Title>
                 <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
+                A tree is a nonlinear data structure consisting of one node called the root and zero or one or more subtrees.
                 </Card.Text>
                 <Button variant="primary"><Link to="/tree" style={{all:"unset",color:"white"}}>Visualize</Link></Button>
               </Card.Body>
@@ -121,9 +115,9 @@ function Home() {
             <Card style={{ width: "18rem" }}>
               <Card.Img variant="top" src={Searching_algo} />
               <Card.Body>
-                <Card.Title>Searching Algorithm</Card.Title>
+                <Card.Title style={{fontWeight: "bold"}}>Searching Algorithm</Card.Title>
                 <Card.Text>
-                  Some quick example text to build on the card title 
+                  Searching Algorithm are used to search an element in array.
                 </Card.Text>
                 <Button variant="primary"><Link to="/searching-algorithms" style={{all:"unset",color:"white"}}>Visualize</Link></Button>
               </Card.Body>
@@ -131,7 +125,7 @@ function Home() {
           </Col>
         
         </Row>
-        <h5 style={{textAlign: "center",margin:"50px 0",color:"#fff"}}>Made with <span style={{color:"#ff0000"}}>❤</span> by Jugal, Jay and Sanket</h5>
+        <h5 style={{textAlign: "center",marginTop:"50px",marginBottom:"10px",color:"#fff"}}>Made with <span style={{color:"#ff0000"}}>❤</span> by Jugal, Jay and Sanket</h5>
       </Container>
     </div>
     </div>
