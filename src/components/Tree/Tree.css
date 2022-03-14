@@ -2,20 +2,20 @@
 .tree{
     width:100%;
     height:90vh;
-    border:1px solid red;
+    display: grid;
+    place-items: center;
     display: flex;
     color:#fff;
 }
 .binary_tree_vis{
    flex:0.75;
-   border:1px solid green;
+
    display: flex;
    flex-direction: column;
-   background-color: #000000;
+  
 }
 .tree_operation{
     flex:0.25;
-    border:1px solid blue;
     padding:10px;
     overflow-y: auto;
 }

@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=ZCOOL+QingKe+HuangYou&display=swap');
+.search__algo{
+
+}
+.searching__heading{
+    width: 100%;
+    background-color:#EEEDDE;
+    height:10vh;
+    display: grid;
+    place-items: center;
+}
+.searching__heading >h1{
+    font-family: 'Bebas Neue', cursive;
+    font-size:80px;
+}
+.searching_card-list{
+    display:grid;
+    place-items: center;
+    width: 100%;
+    height: 80vh;
+}

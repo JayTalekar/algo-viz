@@ -1,11 +1,15 @@
 import React,{useState,useEffect} from 'react'
 import Node from "./Node/Node"
 import "./Pathfinding.css"
-
+import Container from 'react-bootstrap/Container'
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import {getNodesInShortestPathOrder,dijkstra} from "../Algorithm/PathFinding/Djikstra"
 import {dfs} from "../Algorithm/PathFinding/Dfs"
 import {bfs} from "../Algorithm/PathFinding/Bfs"
 import {AStar} from "../Algorithm/PathFinding/astar"
+import Button from 'react-bootstrap/Button'
+import Navbarr from "../components/Navbar"
 
 function Pathfinding() {
 
@@ -13,16 +17,16 @@ function Pathfinding() {
     const [start,setStart]=useState(0)
     const {grid, mouseIsPressed} = state;
     const START_NODE_ROW = 10;
-    const START_NODE_COL = 15;
+    const START_NODE_COL = 5;
     const FINISH_NODE_ROW = 10;
-    const FINISH_NODE_COL = 35;
+    const FINISH_NODE_COL = 30;
 
     const getIntialGrid=()=>{
       const initialGrid=[];
       for(let row=0;row<20;row++)
       {
           const currentRow=[];
-          for(let col=0;col<50;col++)
+          for(let col=0;col<35;col++)
           {
               currentRow.push(createNode(col,row))
           }
@@ -263,9 +267,12 @@ const clearGrid = ()=>{
   
   
     return (
-      
+      <>
+      <Navbarr/>
         <div>
        
+          <Row>
+            <Col xs={12} md={12} lg={8}>
             <div className="grid">
           {grid && grid.map((row, rowIdx) => {
             return (
@@ -292,15 +299,27 @@ const clearGrid = ()=>{
             );
           })}
         </div>
-        <div style={{"display":"flex","alignItems":"center"}}>
-        <button className="btn" onClick={()=>visualize("Dijkstra")}>Visualize Dijkstra</button>
-        <button className="btn" onClick={()=>visualize("DFS")}>DFS</button>
-        <button className="btn" onClick={()=>visualize("BFS")}>BFS</button>
-        <button className="btn" onClick={()=>visualize("astar")}>ASTAR</button>
-        <button className="btn" onClick={clearWalls}>Clear Wall</button>
-        <button className="btn" onClick={clearGrid}>Clear Grid</button>
+        </Col>
+      
+      <Col lg={4} xs={12} md={12}>
+        <div className="d-grid gap-2" style={{"display":"grid","place-items":"center","height":"100%","width":"100%","margin-right":"200px"}}>
+          <Container>
+          <Row>
+        <Col lg={6} sm={12}><Button className="btn"  onClick={()=>visualize("Dijkstra")}>Visualize Dijkstra</Button></Col>
+        <Col lg={6} sm={12}><Button className="btn" style={{width:"150px"}} onClick={()=>visualize("DFS")}>DFS</Button></Col>
+        <Col lg={6} sm={12}><Button className="btn" style={{width:"150px"}} onClick={()=>visualize("BFS")}>BFS</Button></Col>
+        <Col lg={6} sm={12}><Button className="btn" style={{width:"150px"}}  onClick={()=>visualize("astar")}>ASTAR</Button></Col>
+        <Col lg={6} sm={12}><Button className="btn" style={{width:"150px"}} onClick={clearWalls}>Clear Wall</Button></Col>
+        <Col lg={6} sm={12}><Button className="btn" style={{width:"150px"}}  onClick={clearGrid}>Clear Grid</Button></Col>
+        </Row>
+        </Container>
         </div>
+
+        </Col>
+        </Row>
+    
         </div>
+        </>
     )
 }
 

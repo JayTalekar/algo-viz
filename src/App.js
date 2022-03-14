@@ -6,9 +6,14 @@ import SelectionSort from "./Algorithm/Sorting/SelectionSort"
 import Pathfinding from './components/Pathfinding'
 import SearchingSorting from "./components/SearchingSorting"
 import DataStructure from "./components/DataStructure"
-import Nqueen from "./components/Nqueen"
+import Nqueens from "./Algorithm/Nqueen/backTrackingAlgorithms/nQueens/nQueens"
 import Stack from "./components/Stack"
 import Tree from "./components/Tree/Tree"
+import Visualizer from "./Algorithm/Sorting/mergesort-quicksort/SortingVisualizer/Visualizer"
+import Searching from "./components/Searching"
+import LinearSearch from "./Algorithm/Searching/LinearSearch/LinearSearch"
+import BinarySearch from "./Algorithm/Searching/BinarySearch/BinarySearch"
+import Queue from "./components/Queue"
 function App() {
   return (
     <div>
@@ -16,12 +21,16 @@ function App() {
            <Home path="/"/>
            <BubbleSort path="/bubblesort" />
            <SelectionSort path="/selectionsort" />
-           <SearchingSorting path="/searching-sorting"/>
+            <Searching path="/searching-algorithms"/>
            <DataStructure path="/data-structure" />
            <Pathfinding path="/pathfinding" />
-           <Nqueen path="/nqueen" />
+           <Nqueens path="/nqueen" />
            <Stack path="/stack" />
+           <Queue path="/queue"/>
            <Tree path="/tree"/>
+           <Visualizer path="sorting-algorithm"/>
+           <LinearSearch path="/linear-search"/>
+           <BinarySearch path="/binary-search"/>
          </Router>
     </div>
   )

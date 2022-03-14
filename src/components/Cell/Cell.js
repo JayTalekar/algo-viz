@@ -5,7 +5,7 @@ function Cell(props) {
     const {row,col,isQueenPresent}=props;
     return (
         <div className="cell">
-           {isQueenPresent ? <h1>👑</h1>:""} 
+           {isQueenPresent ? <h1>👑</h1>:" "} 
         </div>
     )
 }

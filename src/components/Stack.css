@@ -1,15 +1,20 @@
+.stack{
+    width: 100% ;
+    height: fit-content;
+    margin:0 auto;
+    display:grid;
+    place-items: center;
+}
 .stack-div{
     width:100% ;
-    height:80vh;
-    display: flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
+    height: 100%;
+  
+    
 }
-.stack{
+.stackcontainer{
     width: 350px;
-    height:615px;
-     border:5px solid red;
+    height:575px;
+     border:5px solid #227c9d;
      border-top: none;
      display: flex;
      justify-content: flex-start;
@@ -24,7 +29,9 @@
 .stack-element{
     width:300px;
     height:50px;
-    border:2px solid red;
+    border:2px solid #fff;
+    background-color: #fe6d73;
+    color:#fff;
     text-align:center;
     padding:10px;
     display:auto;
@@ -34,3 +41,19 @@
     margin-bottom:10px;
 
 }
+.stack_heading{
+    width: 100%;
+    background-color:#EEEDDE;
+    height:50px;
+    display: grid;
+    place-items: center;
+}
+@media screen and (max-width: 450px) {
+    .stackcontainer{
+        width:300px;
+        height:450px;
+    }
+   .stack-element{
+       height:35px;
+   }
+  }

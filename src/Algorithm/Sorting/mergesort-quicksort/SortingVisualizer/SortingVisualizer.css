@@ -1,0 +1,123 @@
+.sort-container {
+	width: 100%;
+	height: 90vh;
+	display: flex;
+	background-color: #a2d2ff;
+	flex-direction: row-reverse;
+	align-items: flex-end;
+	overflow: hidden;
+}
+
+.sort-visualizeContainer {
+	margin: 0 5px 0 5px;
+	width: 100%;
+	min-width: 500px;
+	height: 100%;
+	min-height: 500px;
+	display: flex;
+	flex-direction: row;
+	align-items: flex-end;
+	justify-content: space-evenly;
+	background-color: inherit;
+}
+
+.sort-arrayBar {
+	width: 80px;
+	margin: 0px 1px 2px 1px;
+	transition: height 0.2s;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+}
+
+.sort-arrayBar > span {
+	background-color: inherit;
+	margin-bottom: 5px;
+	color: #fff;
+	font-weight: 400;
+}
+
+.sort-button {
+	width: 12rem;
+	height: 3rem;
+	padding: 0.3rem 0rem;
+	border: none;
+	border-radius: 0.317rem;
+	background-color: #ffc8dd;
+	color: #000;
+	font-weight: 700;
+	font-size: 1rem;
+	cursor: pointer;
+}
+
+.sort-button:hover {
+	opacity: 0.85;
+}
+
+.sort-sidebar {
+	width: 25vw;
+	min-width: 200px;
+	height: 100%;
+	min-height: 500px;
+	padding: 0 1.5vw 0 1.5vw;
+	background-color: #ef233c;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.sort-slider-container {
+	height: 3rem;
+	width: 12rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	background-color: inherit;
+}
+
+.sort-slider-container > input {
+	width: 100%;
+}
+
+label {
+	color: #fff;
+	background-color: inherit;
+	font-size: 1.1rem;
+}
+
+.sort-select-box {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 200px;
+	background-color: inherit;
+	font-size: 16px;
+}
+
+header {
+	background-color: inherit;
+	color: #e7d9ea;
+	font-size: larger;
+	text-align: center;
+	line-height: 2rem;
+}
+
+#select {
+	height: 35px;
+	padding: 5px 7px;
+	line-height: 20px;
+	font-size: 18px;
+	width: 100%;
+	border: 2px solid green;
+	border-radius: 6px;
+	margin-top: 10px;
+}
+
+.sort-select-box select:focus {
+	border: 2px solid green;
+}
