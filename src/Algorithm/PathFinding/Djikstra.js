@@ -6,7 +6,7 @@ const dijkstra=(grid, startNode, finishNode)=> {
     const visitedNodesInOrder = [];
     startNode.distance = 0;
     const unvisitedNodes = getAllNodes(grid);
-    console.log('djisktra ',unvisitedNodes)
+    //console.log('djisktra ',unvisitedNodes)
     while (!!unvisitedNodes.length) {
       sortNodesByDistance(unvisitedNodes);
       const closestNode = unvisitedNodes.shift();

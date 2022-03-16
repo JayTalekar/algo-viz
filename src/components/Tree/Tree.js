@@ -104,7 +104,7 @@ function Tree() {
                
                 <Form.Control
                   type="Number"
-                  placeholder="Enter email"
+                  placeholder="Enter a value"
                   onChange={(elem) =>
                     setInsertValue(parseInt(elem.currentTarget.value))
                   }
