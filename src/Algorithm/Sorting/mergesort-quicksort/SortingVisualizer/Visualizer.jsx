@@ -20,7 +20,8 @@ const Visualizer = () => {
 	// state of the array
 	const [mainArray, setMainArray] = useState([]);
 	const [arrayLength, setArrayLength] = useState(15);
-	const [animationSpeed, setAnimationSpeed] = useState(100);
+	const [animationSpeed, setAnimationSpeed] = useState(1000
+		);
 	const [error,setError]=useState("");
 	const [text,setText]=useState("");
 	const [algo, setAlgo] = useState('mergesort');
