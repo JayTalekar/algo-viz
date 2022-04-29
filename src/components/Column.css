@@ -1,0 +1,9 @@
+.column-li{
+    list-style-type: none;
+    float: left;
+    padding:0 10px;
+    margin-right:0 40px;
+    width:25px;
+    color:red;
+    user-select: none;
+}

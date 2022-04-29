@@ -21,14 +21,16 @@ const Visualizer = () => {
 	const [mainArray, setMainArray] = useState([]);
 	const [arrayLength, setArrayLength] = useState(15);
 	const [animationSpeed, setAnimationSpeed] = useState(100);
+	const [error,setError]=useState("");
+	const [text,setText]=useState("");
 	const [algo, setAlgo] = useState('mergesort');
 	const [able, setAble] = useState(true);
 
 	//Render the Array Before DOM loades
-	useEffect(() => {
+	/*useEffect(() => {
 		if (able) populateArray(arrayLength);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [arrayLength, algo]);
+	}, [arrayLength, algo]);*/
 
 	// ABLE / DISABLE BUTTONS ETC.
 	useEffect(() => {
@@ -75,6 +77,10 @@ const Visualizer = () => {
 					idx: i,
 					val: arr[i],
 				});
+				if (document.getElementsByClassName('sort-arrayBar')[i] != null) {
+					document.getElementsByClassName('sort-arrayBar')[i].style.backgroundColor =
+						colors.primaryColor;
+				}
 			}
 			setMainArray(sortedArray);
 			setAble(true);
@@ -125,6 +131,27 @@ const Visualizer = () => {
 		const { arr, count } = heapsort(mainArray, animationSpeed);
 		colorEveryElement(arr, count + 1);
 	};
+	/** code for handling custom input */
+	const handleCustomInput=(e)=>{
+		setMainArray([{}])
+		let textArray=text.split(",");
+		let tempArray=[];
+		let flag=false;
+		console.log(textArray)
+		for(let i=0;i<textArray.length;i++){
+              if(!parseInt(textArray[i])){
+				  alert("Invalid Input !")
+				  flag=true;
+				  break;
+			  }
+			  tempArray.push({idx:i,val:parseInt(textArray[i])});
+		}
+		if(!flag){
+			setMainArray(tempArray);
+			setArrayLength(tempArray.length);
+		}
+		console.log(mainArray)
+	}
 	const startSorting = algo => {
 		switch (algo) {
 			case 'bubblesort':
@@ -194,6 +221,13 @@ const Visualizer = () => {
 						<option value='heapsort'>heap sort</option>
 					</select>
 				</div>
+				<div class="mb-3 mx-auto">
+                      <label for="exampleFormControlTextarea1" class="form-label">Want to give Custom input ?</label>
+                    <textarea class="form-control" type="number" value={text} id="exampleFormControlTextarea1" rows="3" placeholder="please enter comma seperated numbers" onChange={(e)=>setText(e.target.value)}></textarea>				   
+					<br/><button className='sort-button able m-1 mz-2' onClick={handleCustomInput}>
+					Set Custom Input
+				</button>
+             </div>
 				<button className='sort-button able' onClick={() => startSorting(algo)}>
 					Sort
 				</button>
@@ -202,7 +236,7 @@ const Visualizer = () => {
 					onClick={() => populateArray(arrayLength)}
 					className='sort-new-arr-btn button able'
 				>
-					Reset
+					Generate Random
 				</button>
 
 				<div className='sort-slider-container'>

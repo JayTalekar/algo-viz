@@ -4,3 +4,11 @@
         margin: 20px 50px;
     
 }
+.row-li{
+        list-style: none;
+        float: left;
+        color:red;
+        margin-right: 10px;
+        width:15px;
+        user-select:none;
+}

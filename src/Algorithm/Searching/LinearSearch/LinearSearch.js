@@ -25,6 +25,8 @@ class LinearSearch extends Component {
       isFound: false,
       speed: 50,
       size: 10,
+      customInput: "",
+      able: true,
     };
     this.randomNumberGenerator = this.randomNumberGenerator.bind(this);
     this.checkHandler = this.checkHandler.bind(this);
@@ -32,7 +34,7 @@ class LinearSearch extends Component {
     this.resetHandler = this.resetHandler.bind(this);
     this.sleep = this.sleep.bind(this);
   }
-
+  //onsole.log(this.customInout)
   randomNumberGenerator = (size) => {
     const randomNumberArray = [];
     for (let i = 0; i < size; i++) {
@@ -43,6 +45,38 @@ class LinearSearch extends Component {
     console.log(randomNumberArray);
     return randomNumberArray;
   };
+  //for handling custom input
+  handleCustomInput = () => {
+    console.log(this.state.customInput); //
+    let text = this.state.customInput;
+    let textArray = text.split(",");
+    let tempArray = [];
+    let flag = false;
+
+    for (let i = 0; i < textArray.length; i++) {
+      if (!parseInt(textArray[i])) {
+        alert("Invalid Input !");
+        flag = true;
+        break;
+      }
+
+      let nodeObject = { isVisited: false, isFound: false };
+      nodeObject["value"] = parseInt(textArray[i]);
+      tempArray.push(nodeObject);
+      console.log(tempArray);
+    }
+    if (!flag) {
+      this.setState({
+        nodes: tempArray,
+        input: "",
+        isReset: !this.state.isReset,
+        timeTaken: 0,
+        isFound: false,
+        speed: 50,
+        size: tempArray.length,
+      });
+    }
+  };
 
   sleep = (milliseconds) => {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
@@ -50,6 +84,7 @@ class LinearSearch extends Component {
 
   checkHandler = async () => {
     const tempState = { ...this.state };
+    //this.setState({ able: false });
     const startTime = new Date();
 
     for (let i = 0; i < this.state.size; i++) {
@@ -73,6 +108,7 @@ class LinearSearch extends Component {
           ...tempState,
         });
       }
+      //this.setState({ able: false });
     }
     const endTime = new Date();
     let timeDiff = endTime - startTime;
@@ -83,7 +119,7 @@ class LinearSearch extends Component {
     });
     return console.log(`Not Found. Time taken: ${this.state.timeTaken} sec`);
   };
-
+  3;
   resetHandler = () => {
     this.setState({
       nodes: this.randomNumberGenerator(10),
@@ -128,6 +164,35 @@ class LinearSearch extends Component {
         </Row>
         <Row>
           <Col>
+            <Col>
+              <div class="mb-3 mx-auto">
+                <label
+                  for="exampleFormControlTextarea1"
+                  class="form-label text-danger"
+                >
+                  Want to give Custom input ?
+                </label>
+                <textarea
+                  class="form-control"
+                  type="number"
+                  value={this.state.customInput}
+                  id="exampleFormControlTextarea1"
+                  rows="3"
+                  placeholder="please enter comma seperated numbers"
+                  onChange={(event) =>
+                    this.setState({ customInput: event.target.value })
+                  }
+                ></textarea>
+                <br />
+                <button
+                  className="sort-button able m-1 mz-2"
+                  onClick={this.handleCustomInput}
+                  disabled={!this.state.able}
+                >
+                  Set Custom Input
+                </button>
+              </div>
+            </Col>
             <div>
               <FormControl
                 style={{ marginBottom: "2rem" }}

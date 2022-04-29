@@ -24,6 +24,7 @@ class BinarySearch extends Component {
       timeTaken: 0,
       isFound: false,
       speed: 50,
+      customInput: "",
       size: 10,
     };
     this.randomNumberGenerator = this.randomNumberGenerator.bind(this);
@@ -56,6 +57,41 @@ class BinarySearch extends Component {
       speed: 50,
       size: 10,
     });
+  };
+
+  //for handling custom input
+  handleCustomInput = () => {
+    console.log(this.state.customInput); //
+    let text = this.state.customInput;
+    let textArray = text.split(",");
+    let tempArray = [];
+    let flag = false;
+
+    for (let i = 0; i < textArray.length; i++) {
+      if (!parseInt(textArray[i])) {
+        alert("Invalid Input !");
+        flag = true;
+        break;
+      }
+
+      let nodeObject = { isVisited: false, isFound: false };
+      nodeObject["value"] = parseInt(textArray[i]);
+      tempArray.push(nodeObject);
+      console.log(tempArray);
+    }
+    if (!flag) {
+      tempArray.sort((a, b) => a.value - b.value);
+
+      this.setState({
+        nodes: tempArray,
+        input: "",
+        isReset: !this.state.isReset,
+        timeTaken: 0,
+        isFound: false,
+        speed: 50,
+        size: tempArray.length,
+      });
+    }
   };
 
   sleep = (milliseconds) => {
@@ -139,19 +175,47 @@ class BinarySearch extends Component {
         </Row>
         <Row>
           <Col>
-            <div>
-              <FormControl
-                style={{ marginBottom: "2rem" }}
-                placeholder="Enter the number"
-                aria-label="Amount (to the nearest dollar)"
-                type="text"
-                id="userInput"
-                value={this.state.input}
-                onChange={(event) =>
-                  this.setState({ input: Number(event.target.value) })
-                }
-              />
-            </div>
+            <Col>
+              <div class="mb-3 mx-auto">
+                <label
+                  for="exampleFormControlTextarea1"
+                  class="form-label text-danger"
+                >
+                  Want to give Custom input ?
+                </label>
+                <textarea
+                  class="form-control"
+                  type="number"
+                  value={this.state.customInput}
+                  id="exampleFormControlTextarea1"
+                  rows="3"
+                  placeholder="please enter comma seperated numbers"
+                  onChange={(event) =>
+                    this.setState({ customInput: event.target.value })
+                  }
+                ></textarea>
+                <br />
+                <button
+                  className="sort-button able m-1 mz-2"
+                  onClick={this.handleCustomInput}
+                >
+                  Set Custom Input
+                </button>
+              </div>
+              <div>
+                <FormControl
+                  style={{ marginBottom: "2rem" }}
+                  placeholder="Enter the number"
+                  aria-label="Amount (to the nearest dollar)"
+                  type="text"
+                  id="userInput"
+                  value={this.state.input}
+                  onChange={(event) =>
+                    this.setState({ input: Number(event.target.value) })
+                  }
+                />
+              </div>
+            </Col>
           </Col>
         </Row>
         <Row>
